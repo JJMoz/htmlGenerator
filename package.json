@@ -1,0 +1,23 @@
+{
+  "name": "htmlgenerator",
+  "version": "1.0.0",
+  "description": "A web application that allows a user to create webpages without using HTML",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JJMoz/htmlGenerator.git"
+  },
+  "author": "JJ Moz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JJMoz/htmlGenerator/issues"
+  },
+  "homepage": "https://github.com/JJMoz/htmlGenerator#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.7.13"
+  }
+}
