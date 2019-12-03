@@ -29,4 +29,3 @@ app.post("/login", (request, response) => {
 });
 
 
-// mongodb+srv://htmlGeneratorAdmin:<password>@cluster0-urgu0.mongodb.net/test?retryWrites=true&w=majority
