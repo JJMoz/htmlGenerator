@@ -1,3 +1,4 @@
+const model = require("./model.js")
 const auth = require ("./assets/auth.js");
 const express = require("express");
 const bodyParser = require("body-parser");
@@ -6,7 +7,7 @@ const http = (require("http").Server(app));
 const port = 3000;
 http.listen(port);
 console.log("The express server is running on port " + port + "!");
-console.log(auth.getDBURL());
+//console.log(auth.getDBURL());
 
 // ABOVE CODE IS WHAT IS NEEDED TO CREATE A EXPRESS SERVER (this is the simple/basic plan for a Express Server, there are many ways. new updates can create more ways).... Look at request index.js file for more comments
 
@@ -23,7 +24,8 @@ app.post("/login", (request, response) => {
     let requestUsername = request.body.username;
     let requestPassword = request.body.password;
 
-    console.log (requestUsername, requestPassword)
+    console.log(
+    model.checkLogin(requestUsername, requestPassword) );
 
     response.sendStatus(200);
 });
