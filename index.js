@@ -23,11 +23,16 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.post("/login", (request, response) => {
     let requestUsername = request.body.username;
     let requestPassword = request.body.password;
+    console.log(requestPassword);
+  
+    model.checkLogin(requestUsername, requestPassword).then((results) => {
+        console.log(results);
+        response.sendStatus(200);
+    });
 
-    console.log(
-    model.checkLogin(requestUsername, requestPassword) );
-
-    response.sendStatus(200);
+  //  response.sendStatus(200);
 });
 
-
+//username: hello
+// password: 123456
+//dd411a36cc298a64ac7ac208e4db1c63

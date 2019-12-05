@@ -32,6 +32,28 @@
     <input type="reset" form="login"/>
     <button id="submitLogin">Login</button>
 
+    <h1>Register A New Account</h1>
+    <p ude="register-error"></p>
+    <form id=register>
+        <br>
+         <label for="fname">First Name:</label> <br >
+        <input type="text" id="fname" name="fname"/> <br>
+
+        <label for="username">Last Name:</label> <br>
+        <input type="text" id="lname" name="lname"/> <br>
+
+        <label for="username-register">Username:</label> <br>
+        <input type="text" id="username-register" name="username"/> <br>
+
+        <label for="email">Email:</label> <br>
+        <input type="email" id="email" name="email"/> <br>
+
+        <label for="password-register">Password:</label> <br>
+        <input type="password" id="password-register" name="password"/> <br>
+
+
+    </form>
+
     <script>
         $(document).ready(() => {
           //  console.log ( ( CryptoJS.MD5 ("hello") ).toString());
@@ -52,15 +74,27 @@
 
                 // Structure of Login Package
                 const loginData = {
+                    type: "login",
                     username: username,
                     password: CryptoJS.MD5(password).toString()
                 };
+                console.log(loginData.password);
 
                 $.post("http://localhost:3000/login",loginData, (data) => {
                     console.log("The server has responded");
                 });
 
-             
+            });
+
+            $("#submitRegister").click(() => {
+
+                const registerData = {
+                    fname: $("#fname").val(),
+                    lname: $("#lanme").val(),
+                    username: $("#username-register").val(),
+                    email: $("#email").val(),
+                    password: $("#password-register").val()
+                };
 
             });
 
