@@ -89,13 +89,17 @@
             $("#submitRegister").click(() => {
 
                 const registerData = {
+                    type: "registration",
                     fname: $("#fname").val(),
                     lname: $("#lanme").val(),
                     username: $("#username-register").val(),
                     email: $("#email").val(),
-                    password: $("#password-register").val()
+                    password: CryptoJS.MD5( $("#password-register").val() ).toString()
                 };
 
+                $.post("/login", registerData, (data) => {
+                    console.log("The server has responded");
+                })
             });
 
         });

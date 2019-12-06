@@ -52,22 +52,44 @@ async function checkLogin(username, password) {
         username: username,
         password: hashedAndSaltedPassword
     };
-//shorter way to do the commented out code below
+//shorter way to do the commented out code below.. makes into promise... // exec makes it to a promise
     return accountModel.find(searchCriteria).exec();
 
 //converts into a Promise "exec" mongoose exec
    // let result = accountModel.find(searchCriteria, (error, results) => {
    //     if (error) {console.log(error.reason);}  
     //}).exec();
-
    // return result;
 
 }
 
-function updateAuthentication(value) {
-    authenticated = value;
+//function updateAuthentication(value) {authenticated = value;}
+
+async function createAccount(newAccount) {
+
+    let returnValue = null;
+
+    checklogin(newAccount.username, newAccount.password).then((results) => {
+
+        if (results.length >= 1) {
+           
+    } else {
+    let account = new accountModel({
+        fname: newAccount.fname,
+        lname:  newAccount.lname,
+        username:  newAccount.username,
+        email:  newAccount.email,
+        password: md5(newAccount.password + auth.getSalt()),
+        creationDate:  newAccount.Date(),
+        lastLogin:  newAccount.Date(),
+        projectID:  Math.floor( (Math.random() * 100000) + 1)
+    });
+
+  returnValue = account.save();  
 }
 
+
 module.exports = {
-    checkLogin: checkLogin
+    checkLogin: checkLogin,
+    createAccount: createAccount
 }
