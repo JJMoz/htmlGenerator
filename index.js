@@ -22,34 +22,41 @@ app.use(bodyParser.urlencoded({extended: false}));
 
 app.post("/login", (request, response) => {
 
-    if ( request.body.type === "type") {
+    if ( request.body.type === "login") {
         let requestUsername = request.body.username;
         let requestPassword = request.body.password;
-        console.log(requestPassword);
-    
   
         model.checkLogin(requestUsername, requestPassword).then((results) => {
             console.log(results);
+            console.log(requestUsername + "Inside of Promise");
         
             if (results.length === 1) {
-                response.sendStatus(200);
+                // {object with a number}...success login
+                response.send({success: 0});
             } else {
-                response.sendStatus(404);
+                // failed to login
+                response.send({success: 1});
             }
         });
     } else if (request.body.type === "registrations") {
         model.createAccount(request.body).then((results) => {
      
             if (results === null) {
-                response.sendStatus(500);
+                // 3 failed to register
+                response.send({success: 3});
             } else {
-                results.then()
-                response.sendStatus(200);
+                //success to register
+                response.send({success: 2});
             }
-        });
+            
+        }).catch((error) => {
+            console.log(error);
+            // someting failed in the backend
+            response.send({success: 4});
+        });  
     }
 
-  //  response.sendStatus(200);
+
 });
 
 //username: hello

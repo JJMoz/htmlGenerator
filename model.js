@@ -1,3 +1,5 @@
+// model.js DEALS WITH THE DATATBASE
+
 const auth = require("./assets/auth.js");
 const mongoose = require("mongoose");
 const md5 = require("md5");
@@ -72,7 +74,7 @@ async function createAccount(newAccount) {
     checklogin(newAccount.username, newAccount.password).then((results) => {
 
         if (results.length >= 1) {
-           
+           return null;
     } else {
     let account = new accountModel({
         fname: newAccount.fname,
@@ -80,12 +82,18 @@ async function createAccount(newAccount) {
         username:  newAccount.username,
         email:  newAccount.email,
         password: md5(newAccount.password + auth.getSalt()),
-        creationDate:  newAccount.Date(),
-        lastLogin:  newAccount.Date(),
+        creationDate:  new Date(),
+        lastLogin:  new Date(),
         projectID:  Math.floor( (Math.random() * 100000) + 1)
     });
+    //FIX
+    let temp = account.save()
+    console.log(temp);
+    return temp;
+}
 
-  returnValue = account.save();  
+    });
+
 }
 
 
